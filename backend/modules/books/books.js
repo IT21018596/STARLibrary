@@ -51,7 +51,32 @@ async getAllBooks(req, res){
     }
 }
 
+async addNewAuthor(req, res){
+    try{
+        const response = await booksController.addNewAuthor(req.body);
+        res.send(response)
+    }catch(error){
+        console.log(error)
+    }
 }
+
+async getAuthorIdByAuthorName(req, res){
+    try{
+        
+        const headersData = {
+            name: req.params.authorName,
+            enterBy: req.params.enterBy
+        };
+        
+        const response = await booksController.getAuthorIdByAuthorName(headersData);
+        res.send(response)
+    }catch(error){
+        console.log(error)
+    }
+}
+
+}
+
 
 
 module.exports = new Books();

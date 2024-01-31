@@ -42,7 +42,7 @@ const getAllPublishers = async() => {
 const getAllAuthors = async() => {
     const con = await connection.getConnection();
     try {
-        const result = await con.request().query("SELECT  concat (nAuthorID, ' ',  cAuthorsName) as authIdAndName FROM  LIB_Master_Authors")
+        const result = await con.request().query("SELECT  nAuthorID, cAuthorsName FROM  LIB_Master_Authors")
 
         
     return result.recordset;
@@ -57,8 +57,9 @@ const getAllAuthors = async() => {
 }
 
 const insertNewBook = async(book, file) => {
-    console.log("insernt new book controller hit")
-    console.log(book)
+    //console.log("insernt new book controller hit")
+    //console.log("AuthorIDIDIDID: ",book.authId)
+    //console.log("Book: ",book)
     
     const con = await connection.getConnection();
     const res = await con.request()
@@ -101,20 +102,41 @@ const getAllBooks = async() => {
 }
 
 const addNewAuthor = async(author) => {
-    const con = await con.getConnection();
+    const con = await connection.getConnection();
     try{
         const response = await con.request()
         .input("nAuthorID", author.id)
         .input("cAuthorsName", author.name)
         .input("cAuthorOtherName", author.otherName)
-        .input("dEnterDate", author.enterDate)
+        
         .input("cEnterBY", author.enterBy)
         .input("cEditBy", author.editBy)
-        .input("deditDate", author.editDay)
+        .execute("ADD_LIB_Authors");
+
+        return response;
+        
 
     }catch(error){
         console.log(error)
     }
+}
+
+const getAuthorIdByAuthorName = async(author) => {
+    //console.log(author.name)
+    //console.log("getAuthorIdByAuthorName controller hit")
+    
+    
+    const con = await connection.getConnection();
+    const res = await con.request()
+    .input("cAuthorsName", author.name)
+    
+    .input("cEnterBY", author.enterBy)
+    
+    
+    
+    .execute("GET_LIB_AuthorsIDByAuthorsName");
+    return res.recordset[0];
+    
 }
 
 
@@ -124,5 +146,6 @@ module.exports= {
     getAllAuthors,
     insertNewBook,
     getAllBooks,
-    addNewAuthor
+    addNewAuthor,
+    getAuthorIdByAuthorName
 }

@@ -19,7 +19,7 @@ export const UserProvider = ({ children }) => {
         localStorage.setItem('role', decoded.userRank)
         setUser({ token, /* other user properties */ });
         //localStorage.setItem('user', JSON.stringify(token));
-        setWithExpiry(decoded.userRank, 0.1)
+        setWithExpiry(decoded.userRank, 0.9)
       } catch (error) {
         console.error('Error decoding token:', error);
         // Handle the error as needed
