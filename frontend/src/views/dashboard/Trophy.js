@@ -61,10 +61,7 @@ const Trophy = () => {
          
          console.error('Error fetching data:', error);
        }
-
-       
-
-       
+      
    };
 
    useEffect(() => {
