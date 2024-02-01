@@ -29,6 +29,15 @@ class User {
         
     }
 
+    async getAllMembers(req, res){
+        try{
+            const result = await userController.getAllMembers();
+            res.send(result);
+        }catch(error){
+            console.log(error)
+        }
+    }
+
     
 
 

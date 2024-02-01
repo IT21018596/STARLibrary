@@ -9,6 +9,7 @@ class UserRoutes {
         console.log("customer routes hit")
         router.post('/', userFunctions.getMember);
         router.post('/login', userFunctions.loginHandler)
+        router.get('/getAllMembers', userFunctions.getAllMembers)
         
         app.use('/api/v1/member', router)
     }

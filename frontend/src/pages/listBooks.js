@@ -22,6 +22,8 @@ import Facebook from 'mdi-material-ui/Facebook'
 import Linkedin from 'mdi-material-ui/Linkedin'
 import GooglePlus from 'mdi-material-ui/GooglePlus'
 import ShareVariant from 'mdi-material-ui/ShareVariant'
+import TextField from '@mui/material/TextField';
+import InputAdornment from '@mui/material/InputAdornment';
 import Icon from '@mdi/react';
 import { mdiBookOpenPageVariantOutline } from '@mdi/js';
 import { mdiAccount } from '@mdi/js';
@@ -72,14 +74,41 @@ const CardBasic = () => {
   },[])
 
   const imagePath = `http://localhost:8081/uploads/1705338023560WhatsApp Image 2024-01-08 at 11.04.09.jpeg`;
+
+  const [searchTerm, setSearchTerm] = useState('');
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+
+  };
+
+  const filteredBooks = books.filter((book) => 
+    book.cBookName.toLowerCase().includes(searchTerm.toLocaleLowerCase())
+    )
+    
    return (
     <Grid container spacing={6}>
       <Grid item xs={12} sx={{ paddingBottom: 4 }}>
         <Typography variant='h5'>Welcome to the World of Books</Typography>
       </Grid>
+
+      <TextField
+        style={{top: '10px' }}
+          label="Search by Book Name"
+          variant="outlined"
+          fullWidth
+          value={searchTerm}
+          onChange={handleSearchChange}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                {/* You can add a search icon here if needed */}
+              </InputAdornment>
+            ),
+          }}
+        />
       
       
-      {books.map((book) => (
+      {filteredBooks.map((book) => (
 
       <Grid item xs={12} sm={6}>
       <Card>

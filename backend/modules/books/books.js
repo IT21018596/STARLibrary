@@ -51,14 +51,7 @@ async getAllBooks(req, res){
     }
 }
 
-async addNewAuthor(req, res){
-    try{
-        const response = await booksController.addNewAuthor(req.body);
-        res.send(response)
-    }catch(error){
-        console.log(error)
-    }
-}
+
 
 async getAuthorIdByAuthorName(req, res){
     try{

@@ -42,7 +42,9 @@ const getAllPublishers = async() => {
 const getAllAuthors = async() => {
     const con = await connection.getConnection();
     try {
-        const result = await con.request().query("SELECT  nAuthorID, cAuthorsName FROM  LIB_Master_Authors")
+
+        const result = await con.request().query("SELECT   cAuthorsName  FROM  LIB_Master_Authors")
+
 
         
     return result.recordset;
@@ -101,25 +103,6 @@ const getAllBooks = async() => {
 
 }
 
-const addNewAuthor = async(author) => {
-    const con = await connection.getConnection();
-    try{
-        const response = await con.request()
-        .input("nAuthorID", author.id)
-        .input("cAuthorsName", author.name)
-        .input("cAuthorOtherName", author.otherName)
-        
-        .input("cEnterBY", author.enterBy)
-        .input("cEditBy", author.editBy)
-        .execute("ADD_LIB_Authors");
-
-        return response;
-        
-
-    }catch(error){
-        console.log(error)
-    }
-}
 
 const getAuthorIdByAuthorName = async(author) => {
     //console.log(author.name)
@@ -146,6 +129,6 @@ module.exports= {
     getAllAuthors,
     insertNewBook,
     getAllBooks,
-    addNewAuthor,
+
     getAuthorIdByAuthorName
 }

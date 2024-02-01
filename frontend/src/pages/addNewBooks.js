@@ -168,6 +168,23 @@ const FormLayoutsSeparator = () => {
     
   }
 
+  const getAuthorIdByAuthorName = async() => {
+    const enterBy= "HRD"
+    console.log("this is the authoerrrrrrrrr:", selectedAuthors)
+    try{
+      const response = await axios.get(`http://localhost:8081/api/v1/books/getAuthorIdByAuthorName/${selectedAuthors}/${enterBy}`)
+
+      //setAuthorId(response.data.nAuthorID)
+      //console.log("This is the author id: ", response.data.nAuthorID)
+      //console.log("This is the author idddddddd: ", authorId)
+
+      return response.data.nAuthorID
+
+    }catch(error){
+      console.log(error)
+    }
+  }
+
   useEffect(() => {
     getAuthors()
   }, [])

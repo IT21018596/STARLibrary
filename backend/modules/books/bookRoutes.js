@@ -40,6 +40,7 @@ class BooksRoutes {
         app.use('/api/v1/books', router)
 
         router.get('/getAllBooks', bookFunctions.getAllBooks)
+
         router.get('/getAuthorIdByAuthorName/:authorName/:enterBy', bookFunctions.getAuthorIdByAuthorName)
     }
 }module.exports = BooksRoutes;
