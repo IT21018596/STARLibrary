@@ -42,7 +42,9 @@ const getAllPublishers = async() => {
 const getAllAuthors = async() => {
     const con = await connection.getConnection();
     try {
+
         const result = await con.request().query("SELECT   cAuthorsName  FROM  LIB_Master_Authors")
+
 
         
     return result.recordset;
@@ -57,8 +59,9 @@ const getAllAuthors = async() => {
 }
 
 const insertNewBook = async(book, file) => {
-    console.log("insernt new book controller hit")
-    console.log(book)
+    //console.log("insernt new book controller hit")
+    //console.log("AuthorIDIDIDID: ",book.authId)
+    //console.log("Book: ",book)
     
     const con = await connection.getConnection();
     const res = await con.request()
@@ -100,6 +103,7 @@ const getAllBooks = async() => {
 
 }
 
+
 const getAuthorIdByAuthorName = async(author) => {
     //console.log(author.name)
     //console.log("getAuthorIdByAuthorName controller hit")
@@ -118,11 +122,13 @@ const getAuthorIdByAuthorName = async(author) => {
     
 }
 
+
 module.exports= {   
     getAllBookCatCodes,
     getAllPublishers,
     getAllAuthors,
     insertNewBook,
     getAllBooks,
+
     getAuthorIdByAuthorName
 }

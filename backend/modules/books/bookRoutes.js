@@ -34,6 +34,9 @@ class BooksRoutes {
             }
           });
 
+
+        router.post('/addNewAuthor', bookFunctions.addNewAuthor)  
+
         app.use('/api/v1/books', router)
 
         router.get('/getAllBooks', bookFunctions.getAllBooks)
