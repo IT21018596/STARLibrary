@@ -9,6 +9,7 @@ import CreditCardOutline from 'mdi-material-ui/CreditCardOutline'
 import AccountPlusOutline from 'mdi-material-ui/AccountPlusOutline'
 import AlertCircleOutline from 'mdi-material-ui/AlertCircleOutline'
 import GoogleCirclesExtended from 'mdi-material-ui/GoogleCirclesExtended'
+import AccountCheck from 'mdi-material-ui/AccountCheck'
 import { useEffect, useState } from 'react'
 import Icon from '@mdi/react';
 import { mdiBookMultiple } from '@mdi/js';
@@ -141,6 +142,11 @@ const navigation = (role) => {
       title: 'Books',
       icon: LibraryBooksIcon,
       path: '/listBooks'
+    },
+    {
+      title: 'Members',
+      icon: AccountCheck,
+      path: '/members/memberList/'
     },
     {
       title: 'Icons',

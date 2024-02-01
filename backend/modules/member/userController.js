@@ -9,9 +9,7 @@ const  getMember = async(member) => {
     //console.log(member)
     const conn = await connection.getConnection();
 console.log(member)
-console.log(member.ftyCode)
-console.log(member.epf)
-console.log(member.password)
+
     const res = await conn.request()
     .input("nMemvarID", member.memberID)
     
@@ -64,12 +62,27 @@ console.log(result.recordset[0].cMemberRankCode)
     }
 };
 
+const getAllMembers = async () => {
+    try{
+        const conn = await connection.getConnection();
+        const result = await conn.request().query("SELECT  nMemberID, cEPF, cFtyCode, cFiratName, cDesignation   FROM  LIB_Members where cMemberRankCode = 'MEM'")
+
+        
+    return result.recordset;
+
+
+    }catch(error){
+        console.log(error)
+    }
+}
+
 
 
 
 module.exports= {   
     getMember,
     createToken,
-    loginHandler
+    loginHandler,
+    getAllMembers
     
 }

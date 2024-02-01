@@ -51,6 +51,21 @@ async getAllBooks(req, res){
     }
 }
 
+async getAuthorIdByAuthorName(req, res){
+    try{
+        
+        const headersData = {
+            name: req.params.authorName,
+            enterBy: req.params.enterBy
+        };
+        
+        const response = await booksController.getAuthorIdByAuthorName(headersData);
+        res.send(response)
+    }catch(error){
+        console.log(error)
+    }
+}
+
 }
 
 

@@ -158,7 +158,7 @@ const FormLayoutsSeparator = () => {
       const response = await axios.get("http://localhost:8081/api/v1/books/getAllAuthors")
 
       
-        const authorsArray = response.data.map(item => item.authIdAndName);
+        const authorsArray = response.data.map(item => item.cAuthorsName);
         setAuthors(authorsArray);
       
 
@@ -166,6 +166,23 @@ const FormLayoutsSeparator = () => {
       console.log(error)
     }
     
+  }
+
+  const getAuthorIdByAuthorName = async() => {
+    const enterBy= "HRD"
+    console.log("this is the authoerrrrrrrrr:", selectedAuthors)
+    try{
+      const response = await axios.get(`http://localhost:8081/api/v1/books/getAuthorIdByAuthorName/${selectedAuthors}/${enterBy}`)
+
+      //setAuthorId(response.data.nAuthorID)
+      //console.log("This is the author id: ", response.data.nAuthorID)
+      //console.log("This is the author idddddddd: ", authorId)
+
+      return response.data.nAuthorID
+
+    }catch(error){
+      console.log(error)
+    }
   }
 
   useEffect(() => {
@@ -217,10 +234,13 @@ const FormLayoutsSeparator = () => {
     else{
       try{
 
+        const authorID = await getAuthorIdByAuthorName();
+        //console.log("authorID: ", authorID)
+
         const formData = new FormData();
         formData.append("catCode", selectedCatCode.substring(0, 2));
 formData.append("pubId", selectedPublisher.substring(0, 1));
-formData.append("authId", selectedAuthors.substring(0, 1));
+formData.append("authId", authorID);
 formData.append("bookName", bookName);
 formData.append("editionNo", editionNo);
 formData.append("edition", edition);

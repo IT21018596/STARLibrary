@@ -42,7 +42,7 @@ const getAllPublishers = async() => {
 const getAllAuthors = async() => {
     const con = await connection.getConnection();
     try {
-        const result = await con.request().query("SELECT  concat (nAuthorID, ' ',  cAuthorsName) as authIdAndName FROM  LIB_Master_Authors")
+        const result = await con.request().query("SELECT   cAuthorsName  FROM  LIB_Master_Authors")
 
         
     return result.recordset;
@@ -100,23 +100,23 @@ const getAllBooks = async() => {
 
 }
 
-const addNewAuthor = async(author) => {
-    const con = await con.getConnection();
-    try{
-        const response = await con.request()
-        .input("nAuthorID", author.id)
-        .input("cAuthorsName", author.name)
-        .input("cAuthorOtherName", author.otherName)
-        .input("dEnterDate", author.enterDate)
-        .input("cEnterBY", author.enterBy)
-        .input("cEditBy", author.editBy)
-        .input("deditDate", author.editDay)
-
-    }catch(error){
-        console.log(error)
-    }
+const getAuthorIdByAuthorName = async(author) => {
+    //console.log(author.name)
+    //console.log("getAuthorIdByAuthorName controller hit")
+    
+    
+    const con = await connection.getConnection();
+    const res = await con.request()
+    .input("cAuthorsName", author.name)
+    
+    .input("cEnterBY", author.enterBy)
+    
+    
+    
+    .execute("GET_LIB_AuthorsIDByAuthorsName");
+    return res.recordset[0];
+    
 }
-
 
 module.exports= {   
     getAllBookCatCodes,
@@ -124,5 +124,5 @@ module.exports= {
     getAllAuthors,
     insertNewBook,
     getAllBooks,
-    addNewAuthor
+    getAuthorIdByAuthorName
 }
